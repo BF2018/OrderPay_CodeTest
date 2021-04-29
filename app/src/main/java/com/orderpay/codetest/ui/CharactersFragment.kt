@@ -1,15 +1,12 @@
 package com.orderpay.codetest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.orderpay.codetest.R
 import com.orderpay.codetest.databinding.FragmentCharactersBinding
 import com.orderpay.codetest.ui.viewadapters.CharacterClick
@@ -21,7 +18,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CharactersFragment : Fragment() {
 
     private var viewModelAdapter: CharactersAdapter? = null
-
+    private lateinit var binding : FragmentCharactersBinding
+    private lateinit var v: View
     /**
      * Here, by viewModel() creates the instance for the ViewModel and it will also resolve the dependency required by it.
      */
@@ -33,8 +31,10 @@ class CharactersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return FragmentCharactersBinding.inflate(inflater,container,false).apply{
+            binding = this
+            v = this.root.findViewById(R.id.CharactersFragmentLayout)
             viewModelAdapter = CharactersAdapter(CharacterClick {
-                viewModel.displayPropertyDetails(it)
+                viewModel?.displayPropertyDetails(it)
             })
 
             recyclerView.apply {
@@ -42,6 +42,15 @@ class CharactersFragment : Fragment() {
                 adapter = viewModelAdapter
             }
 
+            viewModel?.navigateToSelectedProperty?.observe(viewLifecycleOwner, {
+                if (null != it) {
+                    this@CharactersFragment.findNavController().navigate(R.id.CharacterDetailFragment)
+                       // CharactersFragmentDirections.actionCharactersFragmentToCharDetailFragment(it)
+
+                    // Tell the ViewModel we've made the navigate call to prevent multiple navigation
+                    viewModel?.displayPropertyDetailsComplete()
+                }
+            })
         }.root
 
     }
@@ -56,13 +65,13 @@ class CharactersFragment : Fragment() {
         viewModel.loadingState.observe(viewLifecycleOwner, {
             when (it.status) {
                 LoadingState.Status.ERROR -> {
-
+                    binding.progressBar.visibility = View.GONE
                 }
                 LoadingState.Status.LOADING -> {
-
+                  binding.progressBar.visibility = View.VISIBLE
                 }
                 LoadingState.Status.SUCCESS -> {
-
+                  binding.progressBar.visibility = View.GONE
                 }
             }
     }) }

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-allopen'
+    id 'kotlin-parcelize'
 }
 
 allOpen {
@@ -55,6 +56,10 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    //navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
     //LifeCycle
     implementation 'androidx.lifecycle:lifecycle-common:2.3.1'

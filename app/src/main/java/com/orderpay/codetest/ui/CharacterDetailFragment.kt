@@ -12,10 +12,18 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class CharacterDetailFragment : Fragment() {
 
-    val viewModel by viewModel<CharacterDetailViewModel>()
+    private val charDetailViewModel by viewModel<CharacterDetailViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
        return  FragmentCharacterDetailBinding.inflate(inflater,container,false).apply {
+            val selectedProperty = arguments?.let {
+                CharacterDetailFragmentArgs.fromBundle(it).selectedProperty
+            }
+           this.viewModel = charDetailViewModel
+
+           selectedProperty?.let {
+               charDetailViewModel.setProperty(selectedProperty)
+           }
 
         }.root
     }
