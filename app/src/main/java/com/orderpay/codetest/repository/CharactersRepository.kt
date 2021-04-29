@@ -10,7 +10,7 @@ import timber.log.Timber
 @OpenForTesting
 class CharactersRepository(private val apiServices: ApiServices, private val database : AppDataBase) {
 
-    suspend fun refreashCharacters() {
+    suspend fun refreshCharacters() {
         withContext(Dispatchers.IO) {
             Timber.d("refresh characters is called")
             val characterList = apiServices.getAllCharacters().await()
