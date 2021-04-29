@@ -32,21 +32,10 @@ class CharacterViewModel(private val charactersRepo: CharactersRepository) : Vie
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    // The internal MutableLiveData for the selected character
-    private val _selectedProperty = MutableLiveData<CharacterEntity>()
-
-    // The external LiveData for the SelectedCharacter
-    val selectedProperty: LiveData<CharacterEntity>
-        get() = _selectedProperty
-
     init {
         refreshDataFromRepository()
     }
 
-
-    fun setProperty(characterProperty: CharacterEntity) {
-        _selectedProperty.value = characterProperty
-    }
 
     /**
      * Refresh data from the repository. Use a coroutine launch to run in a background thread.
