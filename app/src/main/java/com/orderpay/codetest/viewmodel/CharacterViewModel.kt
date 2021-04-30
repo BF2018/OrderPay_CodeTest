@@ -2,6 +2,7 @@ package com.orderpay.codetest.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.orderpay.codetest.database.CharacterEntity
 import com.orderpay.codetest.repository.CharactersRepository
@@ -73,6 +74,20 @@ class CharacterViewModel(private val charactersRepo: CharactersRepository) : Vie
      */
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProperty.value = null
+    }
+
+
+
+    /**
+     * For Filter Feature based on Appearance
+     */
+    lateinit var allItemsFiltered: LiveData<List<CharacterEntity>>
+    var filter = MutableLiveData<String>("%")
+
+    init {
+        allItemsFiltered = Transformations.switchMap(filter) { filter ->
+            charactersRepo.getItemsByAppearance(filter)
+        }
     }
 
 

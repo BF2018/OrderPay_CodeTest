@@ -19,7 +19,9 @@ class CharactersAdapter(val callback: CharacterClick) : RecyclerView.Adapter<Cha
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
       holder.viewDataBinding.also {
-
+         it.results = results[position]
+          // to handle onClick
+          it.resultsCallBack = callback
       }
     }
 

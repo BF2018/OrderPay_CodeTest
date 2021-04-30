@@ -1,5 +1,6 @@
 package com.orderpay.codetest.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,18 +15,16 @@ class CharacterDetailFragment : Fragment() {
 
     private val charDetailViewModel by viewModel<CharacterDetailViewModel>()
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-       return  FragmentCharacterDetailBinding.inflate(inflater,container,false).apply {
-            val selectedProperty = arguments?.let {
-                CharacterDetailFragmentArgs.fromBundle(it).selectedProperty
-            }
-           this.viewModel = charDetailViewModel
-
-           selectedProperty?.let {
-               charDetailViewModel.setProperty(selectedProperty)
-           }
-
-        }.root
+           val binding = FragmentCharacterDetailBinding.inflate(inflater)
+           binding.lifecycleOwner = this@CharacterDetailFragment
+           binding.viewModel = charDetailViewModel
+           val selectedProperty = CharacterDetailFragmentArgs.fromBundle(arguments!!).selectedProperty
+        if (selectedProperty != null) {
+            charDetailViewModel.setProperty(selectedProperty)
+        }
+           return binding.root
     }
 
 }

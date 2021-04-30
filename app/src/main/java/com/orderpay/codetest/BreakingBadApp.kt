@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.work.*
 import com.orderpay.codetest.background.SyncDatabaseWM
+import com.orderpay.codetest.database.viewModelModule
 import com.orderpay.codetest.di.apiModule
 import com.orderpay.codetest.di.characterRepoModule
 import com.orderpay.codetest.di.databaseModule
@@ -32,8 +33,8 @@ class BreakingBadApp : Application() {
          * */
        startKoin{
            androidContext(this@BreakingBadApp)
-           androidLogger(Level.DEBUG)
-           modules(listOf(characterRepoModule, netModule, apiModule, databaseModule))
+           androidLogger(Level.NONE)
+           modules(listOf(characterRepoModule, netModule, apiModule, databaseModule, viewModelModule))
        }
 
         // Start WorkManager

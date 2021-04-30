@@ -9,6 +9,9 @@ import androidx.databinding.BindingAdapter
  * Binding adapter used to display images from URL using Glide
  */
 @BindingAdapter("imageUrl")
-fun setImageUrl(imageView: ImageView, url: String) {
-    Glide.with(imageView.context).load(url).into(imageView)
+fun setImageUrl(imageView: ImageView, url: String?) {
+    url?.apply {
+        Glide.with(imageView.context).load(this).into(imageView)
+    }
+
 }
