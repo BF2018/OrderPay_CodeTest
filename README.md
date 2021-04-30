@@ -27,3 +27,5 @@ Volley could be used as an alternative networking library for Retrofit and lastl
 
  ## Further Improvements
     • Refactor project to use Pagination 3 that has been developed with Kotlin coroutines in mind.
+ ## Screen shots 
+ ![Home Screen](home_screen.png) ![Detail Screen](detail_screen.png)
