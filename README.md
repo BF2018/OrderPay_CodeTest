@@ -31,6 +31,6 @@ Volley could be used as an alternative networking library for Retrofit and lastl
 
 <p align="center">
   <img src="home_screen.png" width="200" height="400" title="hover text">
-  <img src="detail_screen.png" width="300" height="400" alt="accessibility text">
+  <img src="detail_screen.png" width="200" height="400" alt="accessibility text">
 </p>
 
