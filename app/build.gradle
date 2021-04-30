@@ -16,7 +16,7 @@ android {
         }
     }
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.orderpay.codetest"
@@ -27,8 +27,9 @@ android {
         // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "com.example.breakingbad_codetest.util.TestAppJUnitRunner"
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
     sourceSets {
         androidTest.java.srcDirs += "src/test/java"

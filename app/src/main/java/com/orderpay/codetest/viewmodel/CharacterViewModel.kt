@@ -81,8 +81,8 @@ class CharacterViewModel(private val charactersRepo: CharactersRepository) : Vie
     /**
      * For Filter Feature based on Appearance
      */
-    lateinit var allItemsFiltered: LiveData<List<CharacterEntity>>
-    var filter = MutableLiveData<String>("%")
+    var allItemsFiltered: LiveData<List<CharacterEntity>>
+    var filter = MutableLiveData("%")
 
     init {
         allItemsFiltered = Transformations.switchMap(filter) { filter ->

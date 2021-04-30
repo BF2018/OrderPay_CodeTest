@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.orderpay.codetest.R
+//import com.orderpay.codetest.util.EspressoidilingResource
 import com.orderpay.codetest.databinding.FragmentCharactersBinding
 import com.orderpay.codetest.ui.viewadapters.CharacterClick
 import com.orderpay.codetest.ui.viewadapters.CharactersAdapter
@@ -68,12 +69,13 @@ class CharactersFragment : Fragment() {
 
 
     private fun setupObserver() {
-
+        //EspressoIdlingResource.increment()
         characterViewModel.allItemsFiltered.observe(viewLifecycleOwner, { items ->
             // update the displayed items when the filtered results change
             items.let { charactersAdapter?.results = items }
+            //EspressoIdlingResource.decrement()
         })
-
+        //EspressoIdlingResource.increment()
         characterViewModel.loadingState.observe(viewLifecycleOwner, {
             when (it.status) {
                 LoadingState.Status.ERROR -> {
@@ -88,6 +90,7 @@ class CharactersFragment : Fragment() {
 
                 }
             }
+           // EspressoIdlingResource.decrement()
         })
     }
 }
